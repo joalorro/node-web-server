@@ -14,11 +14,11 @@ app.use( (req,res,next) => {
 	const log = `${now}: ${req.method} ${req.url}`
 
 	console.log(`log`)
-	fs.appendFile('server.log', log + '\n', (err) => {
-		if (err) {
-			console.log('Unable to append to server.log')
-		}
-	})
+	// fs.appendFile('server.log', log + '\n', (err) => {
+	// 	if (err) {
+	// 		console.log('Unable to append to server.log')
+	// 	}
+	// })
 	next()
 })
 
@@ -45,7 +45,15 @@ app.get('/', (req,resp) => {
 
 app.get('/about', (req, resp) => {
 	resp.render('about.hbs', {
-		pageTitle: 'About Page'
+		pageTitle: 'About Page',
+		text: 'whaddup doe?'
+	})
+})
+
+app.get('/projects', (req,resp) => {
+	resp.render('projects.hbs', {
+		pageTitle: 'Projects Page',
+		text: 'Projects!'
 	})
 })
 
