@@ -1,19 +1,24 @@
 const express = require('express')
+const hbs = require('hbs')
+
 const app = express()
 
+app.set('view engine', 'hbs')
+app.use(express.static(__dirname + '/public'))
+
 app.get('/', (req,resp) => {
-	// resp.send('<h1>hello express</h1>')
-	resp.send({
-		name: 'Beef',
-		likes: [
-			'beef',
-			'smelling like beef'
-		]
+	resp.render('home.hbs', {
+		pageTitle: 'Home Page',
+		welcomeMsg: 'Welcome to the Home Page',
+		currentYear: new Date().getFullYear()
 	})
 })
 
 app.get('/about', (req, resp) => {
-	resp.send('<p>About Beef</p>')
+	resp.render('about.hbs', {
+		pageTitle: 'About Page',
+		currentYear: new Date().getFullYear()
+	})
 })
 
 app.get('/bad', (req, resp) => {
@@ -22,4 +27,6 @@ app.get('/bad', (req, resp) => {
 	})
 })
 
-app.listen(3000)
+app.listen(3000, () => {
+	console.log('Server running on port 3000')
+})
